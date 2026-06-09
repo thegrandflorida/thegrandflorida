@@ -87,7 +87,8 @@ export default function PropertyDetailPage() {
     { id: 'notes', label: 'Notes' },
   ]
 
-  const scoreBreakdownKeys: { key: keyof typeof score; label: string }[] = [
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const scoreBreakdownKeys: { key: string; label: string }[] = [
     { key: 'location_score', label: 'Location' },
     { key: 'zoning_upside_score', label: 'Zoning Upside' },
     { key: 'value_dislocation_score', label: 'Value Dislocation' },
@@ -408,7 +409,7 @@ export default function PropertyDetailPage() {
               <CardContent>
                 <div className="space-y-2.5">
                   {scoreBreakdownKeys.map(({ key, label }) => {
-                    const val = score[key] as number | null | undefined
+                    const val = (score as unknown as Record<string, unknown>)[key] as number | null | undefined
                     if (val == null) return null
                     const pct = Math.min(100, Math.max(0, val))
                     return (
