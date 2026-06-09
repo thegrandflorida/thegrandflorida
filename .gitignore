@@ -50,3 +50,27 @@ next-env.d.ts
 # Scripts output
 scripts/*.js
 .claude/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+*.pyd
+.Python
+.venv/
+venv/
+env/
+ENV/
+*.egg-info/
+*.egg
+.eggs/
+pip-wheel-metadata/
+.pytest_cache/
+
+# Turbo
+.turbo/
+
+# Dist
+dist/
