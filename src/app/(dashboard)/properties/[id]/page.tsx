@@ -15,6 +15,7 @@ import { PropertyComps } from '@/components/properties/PropertyComps'
 import { AISummary } from '@/components/properties/AISummary'
 import { PropertyNotes } from '@/components/properties/PropertyNotes'
 import { formatCurrency, formatAcres, formatDate, formatAddress } from '@/lib/utils/format'
+import { ScoreBreakdownChart } from '@/components/scoring/ScoreBreakdownChart'
 
 type Tab = 'overview' | 'financials' | 'comps' | 'ai' | 'notes'
 
@@ -85,17 +86,6 @@ export default function PropertyDetailPage() {
     { id: 'comps', label: 'Comps' },
     { id: 'ai', label: 'AI Summary' },
     { id: 'notes', label: 'Notes' },
-  ]
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const scoreBreakdownKeys: { key: string; label: string }[] = [
-    { key: 'location_score', label: 'Location' },
-    { key: 'zoning_upside_score', label: 'Zoning Upside' },
-    { key: 'value_dislocation_score', label: 'Value Dislocation' },
-    { key: 'distress_signal_score', label: 'Distress Signal' },
-    { key: 'environmental_risk_score', label: 'Environmental Risk' },
-    { key: 'market_velocity_score', label: 'Market Velocity' },
-    { key: 'utility_readiness_score', label: 'Utility Readiness' },
   ]
 
   return (
@@ -401,33 +391,15 @@ export default function PropertyDetailPage() {
           </Card>
 
           {/* Opportunity Score Breakdown */}
-          {score && (
+          {score?.score_inputs && (
             <Card>
               <CardHeader>
                 <CardTitle>Score Breakdown</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-2.5">
-                  {scoreBreakdownKeys.map(({ key, label }) => {
-                    const val = (score as unknown as Record<string, unknown>)[key] as number | null | undefined
-                    if (val == null) return null
-                    const pct = Math.min(100, Math.max(0, val))
-                    return (
-                      <div key={String(key)}>
-                        <div className="flex justify-between text-[10px] mb-1">
-                          <span className="text-slate-400">{label}</span>
-                          <span className="text-slate-300">{val.toFixed(1)}</span>
-                        </div>
-                        <div className="h-1.5 rounded-full bg-slate-700 overflow-hidden">
-                          <div
-                            className="h-full rounded-full bg-teal-500"
-                            style={{ width: `${pct}%` }}
-                          />
-                        </div>
-                      </div>
-                    )
-                  })}
-                </div>
+                <ScoreBreakdownChart
+                  scoreBreakdown={score.score_inputs as Record<string, number>}
+                />
               </CardContent>
             </Card>
           )}
