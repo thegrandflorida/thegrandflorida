@@ -1,0 +1,51 @@
+{
+  "name": "florida-builder",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "type-check": "tsc --noEmit",
+    "db:test": "npx tsx scripts/test-db-connection.ts",
+    "db:types": "npx supabase gen types typescript --project-id $SUPABASE_PROJECT_ID > src/lib/supabase/database.types.ts",
+    "inngest:dev": "npx inngest-cli@latest dev"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.4.0",
+    "@supabase/ssr": "^0.12.0",
+    "@supabase/supabase-js": "^2.108.0",
+    "@tanstack/react-query": "^5.101.0",
+    "@tanstack/react-query-devtools": "^5.101.0",
+    "@types/mapbox-gl": "^3.4.1",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.4.0",
+    "inngest": "^4.5.0",
+    "lucide-react": "^1.17.0",
+    "mapbox-gl": "^3.24.0",
+    "next": "16.2.7",
+    "openai": "^6.42.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-hook-form": "^7.78.0",
+    "react-map-gl": "^8.1.1",
+    "recharts": "^3.8.1",
+    "resend": "^6.12.4",
+    "tailwind-merge": "^3.6.0",
+    "zod": "^4.4.3",
+    "zustand": "^5.0.14"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20.19.42",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "dotenv-cli": "^11.0.0",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.7",
+    "tailwindcss": "^4",
+    "tsx": "^4.22.4",
+    "typescript": "^5"
+  }
+}
