@@ -49,3 +49,4 @@ next-env.d.ts
 
 # Scripts output
 scripts/*.js
+.claude/
